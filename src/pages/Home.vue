@@ -4,6 +4,7 @@ import useStore from '../store/useStore';
 import { storeToRefs } from 'pinia';
 import type { Ref } from 'vue';
 import ImageCard from '../components/ImageCard.vue';
+import Hero from '../components/Hero.vue';
 const store = useStore()
 const { images } = storeToRefs(store)
 const { getImages } = store
@@ -37,10 +38,13 @@ onUnmounted(() => {
 </script>
 
 <template>
+    <Hero />
     <div
         class="grid grid-rows-3 grid-flow-row-dense grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-y-8 gap-x-6 my-20 items-start md:px-8">
-        
-        <ImageCard :profile="image?.profile_image?.small" :name="image.user.name" :userName="image?.social?.instagram_username" :img="image?.urls?.regular" v-for="image in images" :key="image.id"  />
+
+        <ImageCard :profile="image?.profile_image?.small" :name="image.user.name"
+            :userName="image?.social?.instagram_username" :img="image?.urls?.regular" v-for="image in images"
+            :key="image.id" />
     </div>
 </template>
 
