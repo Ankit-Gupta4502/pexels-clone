@@ -32,11 +32,7 @@ const useStore = defineStore('store', {
         async getImages(perPage: number = 20, page: number = 1) {
             this.loading = true;
             try {
-                const response = await axios(`https://api.pexels.com/v1/curated?per_page=${perPage}&page=${page}`, {
-                    headers: {
-                        Authorization: secretKey
-                    }
-                })
+                const response = await axios(`https://api.unsplash.com/photos?per_page=${perPage}&page=${page}&client_id=${secretKey}`)
                 this.images = await response.data.photos
                 this.loading = false;
 
