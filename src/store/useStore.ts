@@ -38,7 +38,7 @@ const useStore = defineStore('store', {
         {
             loading: false as boolean,
             errors: {} as any | Error,
-            images: [] as Array<imageType>,
+            images: [] as imageType[],
             heroImg: '' as string
         }
     ),
@@ -47,7 +47,7 @@ const useStore = defineStore('store', {
             this.loading = true;
             try {
                 const response = await axios(`https://api.unsplash.com/photos?per_page=${perPage}&page=${page}&client_id=${secretKey}`)
-                this.images = await response.data.photos
+                this.images =  [...this.images,...response.data]
                 this.loading = false;
             } catch (error: any) {
                 this.errors = error.message
@@ -57,13 +57,16 @@ const useStore = defineStore('store', {
         async getImageById(id: number) {
             try {
                 const response = await axios(`https://api.unsplash.com/photos/${id}?client_id=${secretKey}`)
-            } catch (error) {
-
+              
+                
+            } catch (error: any) {
+                this.errors = error.response.data
             }
         },
         async getRandomImage(){
             try {
                 const response = await axios(`https://api.unsplash.com/photos/random?client_id=${secretKey}`)
+                this.heroImg = response.data?.urls?.full
             } catch (error) {
                 
             }

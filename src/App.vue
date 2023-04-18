@@ -2,7 +2,6 @@
 import Hero from './components/Hero.vue';
 import { onMounted } from 'vue';
 import useStore from './store/useStore';
-
 const { getImages } = useStore()
 onMounted(() => {
   getImages()

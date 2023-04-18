@@ -1,15 +1,21 @@
 <script setup lang="ts" >
 import { storeToRefs } from 'pinia';
 import useStore from '../store/useStore';
-const { images } = storeToRefs(useStore())
+import { onMounted } from 'vue';
+const store = useStore()
+const { heroImg } = storeToRefs(store)
+const  {getRandomImage}  = store
+onMounted(()=>{
+    getRandomImage()
+})
 </script>
 
 <template>
-    <div :style="{ backgroundImage: 'url(' + images?.[5]?.src.original + ')' }"
+    <div :style="{ backgroundImage: 'url(' + heroImg + ')' }"
         class="h-[80vh] min-h-[400px] relative bg-center bg-cover bg-no-repeat grid place-items-center">
         <div class="bg-black/60 z-0 absolute inset-0"></div>
         <div class="w-3/6 mx-auto relative z-30">
-            <h1 class="text-white text-3xl font-bold mb-6 ">
+            <h1 class="text-white text-4xl leading-snug font-bold mb-6 ">
                 The best free stock photos, royalty free images & videos shared by creators.
             </h1>
 
