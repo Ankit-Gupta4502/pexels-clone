@@ -6,13 +6,15 @@ const props = defineProps<{
     altDescription?:string,
     likes?:number,
     img:string,
-    profile:string
+    profile:string,
+    handleModal?:(id:string)=>void,
+    id:string
 }>()
 </script>
 
 
 <template>
-<div class="relative group rounded-xl overflow-hidden img-wrapper  ">
+<div class="relative cursor-pointer min-h-[100px] group rounded-xl overflow-hidden img-wrapper  " @click="()=>handleModal?.(id)" >
             <img :src="img" alt="" class="object-cover">
             <div
                 class="absolute group-hover:translate-y-0 transition-all duration-500 translate-y-full inset-0 w-full h-full flex flex-col  justify-between py-5 bg-black/50 px-3">

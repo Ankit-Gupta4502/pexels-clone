@@ -1,10 +1,15 @@
 <script setup lang="ts" >
 import { storeToRefs } from 'pinia';
 import useStore from '../store/useStore';
-import { onMounted } from 'vue';
+import { Ref, onMounted, ref, unref } from 'vue';
+import { useRouter } from 'vue-router';
 const store = useStore()
+const router  = useRouter()
 const { heroImg } = storeToRefs(store)
+const search:Ref<string> = ref("")
 const  {getRandomImage}  = store
+const naviagte = () => router.push(`/photos/${unref(search)}`)
+
 onMounted(()=>{
     getRandomImage()
 })
@@ -14,7 +19,7 @@ onMounted(()=>{
     <div :style="{ backgroundImage: 'url(' + heroImg + ')' }"
         class="h-[80vh] min-h-[400px] relative bg-center bg-cover bg-no-repeat grid place-items-center">
         <div class="bg-black/60 z-0 absolute inset-0"></div>
-        <div class="w-3/6 mx-auto relative z-30">
+        <div class="md:w-3/6 mx-auto relative z-30">
             <h1 class="text-white text-4xl leading-snug font-bold mb-6 ">
                 The best free stock photos, royalty free images & videos shared by creators.
             </h1>
@@ -28,7 +33,8 @@ onMounted(()=>{
                 </svg>
                 <input
                     class="focus:ring-2 focus:ring-black/40 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-3 pl-10 ring-1 ring-slate-200 shadow-sm"
-                    type="text" aria-label="Filter projects" placeholder="Search Images">
+                    v-model="search"
+                    type="text" v-on:keyup.enter="naviagte" aria-label="Filter projects" placeholder="Search Images">
         </div>
     </div>
 </div></template>
