@@ -48,7 +48,7 @@ onBeforeRouteLeave(()=>resetImages())
 
 <template>
     <div>
-        <div class="lg:columns-4 md:columns-3 sm:columns-1 xl:columns-4 md:space-x-3 space-y-4 my-20 items-start md:px-8">
+        <div class="lg:columns-4 md:columns-3 sm:columns-1 xl:columns-4 md:space-x-3 mx-auto space-y-4 my-20 items-start md:px-8">
             <ImageModal :handleModal="handleModal" :id="unref(imageId)" :isActive="isActive" />
             <ImageCard :id="image.id"  :profile="image?.profile_image?.small || ''" :name="image.user.name"
                 :userName="image?.social?.instagram_username" :description="image.description || image.alt_description"
